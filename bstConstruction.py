@@ -67,7 +67,40 @@ class BST:
     currentNode = self
     while currentNode.left is not None:
       currentNode = currentNode.left
-    return currentNode.value
+    return currentNode.value\
+      
+  def findClosestValueInBSTRecursive(self, target):
+    currentNode = self
+    return self.findClosestValueInBSTHelperRecursive(currentNode, target, float("inf"))
+  
+  def findClosestValueInBSTHelperRecursive(self, tree, target, closest):
+    if tree is None:
+      return closest
+    if abs(target - closest) > abs(target - tree.value):
+      closest = tree.value
+    if target < tree.value:
+      return self.findClosestValueInBSTHelperRecursive(tree.left, target, closest)
+    elif target > tree.value:
+      return self.findClosestValueInBSTHelperRecursive(tree.right, target, closest)
+    else:
+      return closest
+    
+  def findClosestValueInBSTIterative(self, target):
+    currentNode = self
+    return self.findClosestValueInBSTHelperIterative(currentNode, target, float("inf"))
+  
+  def findClosestValueInBSTHelperIterative(self, tree, target, closest):
+    currentNode = tree
+    while currentNode is not None:
+      if abs(target - closest) > abs(target - currentNode.value):
+        closest = currentNode.value
+      if target < currentNode.value:
+        currentNode = currentNode.left
+      elif target > currentNode.value:
+        currentNode = currentNode.right
+      else:
+        break
+    return closest
   
 a = BST(10)
 a.insert(5)
@@ -77,5 +110,7 @@ a.insert(14)
 a.insert(22)
 a.insert(5)
 a.insert(15)
+print(a.findClosestValueInBSTRecursive(12))
+print(a.findClosestValueInBSTIterative(12))
 
 print(a)
