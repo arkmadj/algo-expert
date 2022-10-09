@@ -102,6 +102,39 @@ class BST:
         break
     return closest
   
+  def inOrderTraversal(self):
+    currentNode = self
+    return self.inOrderTraversalHelper(currentNode, array=[])
+  
+  def inOrderTraversalHelper(self, tree, array):
+    if tree is not None:
+      self.inOrderTraversalHelper(tree.left, array)
+      array.append(tree.value)
+      self.inOrderTraversalHelper(tree.right, array)
+    return array
+  
+  def preOrderTraversal(self):
+    currentNode = self
+    return self.preOrderTraversalHelper(currentNode, array=[])
+  
+  def preOrderTraversalHelper(self, tree, array):
+    if tree is not None:
+      array.append(tree.value)
+      self.preOrderTraversalHelper(tree.left, array)
+      self.preOrderTraversalHelper(tree.right, array)
+    return array
+  
+  def postOrderTraversal(self):
+    currentNode = self
+    return self.postOrderTraversalHelper(currentNode, array=[])
+  
+  def postOrderTraversalHelper(self, tree, array):
+    if tree is not None:
+      self.postOrderTraversalHelper(tree.left, array)
+      self.postOrderTraversalHelper(tree.right, array)
+      array.append(tree.value)
+    return array
+  
 a = BST(10)
 a.insert(5)
 a.insert(2)
@@ -112,5 +145,8 @@ a.insert(5)
 a.insert(15)
 print(a.findClosestValueInBSTRecursive(12))
 print(a.findClosestValueInBSTIterative(12))
+print(a.inOrderTraversal())
+print(a.preOrderTraversal())
+print(a.postOrderTraversal())
 
 print(a)
