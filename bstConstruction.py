@@ -218,7 +218,7 @@ class BST:
   def nodeDepthsRecursive(self):
     return self.nodeDepthsRecursiveHelper(self,0)
   
-  def nodeDepthsRecursiveHelper(self, node, depth):
+  def nodeDepthsRecursiveHelper(self, node, depth=0):
     if node is None:
       return 0
     return depth + self.nodeDepthsRecursiveHelper(node.left, depth+1) + self.nodeDepthsRecursiveHelper(node.right, depth+1)
@@ -248,6 +248,26 @@ class BST:
         queue.append(current.right)
         
     return array
+  
+  def allKindsOfnodeDepthsIterative(self):
+    sumofAllDepths = 0
+    stack = [self]
+    while len(stack) > 0:
+      node = stack.pop()
+      if node is None:
+        continue
+      sumofAllDepths += self.nodeDepthsRecursiveHelper(node)
+      stack.append(node.left)
+      stack.append(node.right)
+    return sumofAllDepths
+  
+  def allKindsOfNodeDepthsRecursive(self):
+    return self.nodeDepthsRecursiveHelper(self, 0)
+  
+  def allKindsOfNodeDepthRecursiveHelper(self, node):
+    if node is None:
+      return 0
+    return self.allKindsOfNodeDepthRecursiveHelper(node.left) + self.allKindsOfNodeDepthRecursiveHelper(node.right) + self.nodeDepthsRecursiveHelper(node)
       
 a = BST(10)
 a.insert(5)
@@ -269,5 +289,8 @@ print(a.nodeDepthsItrerative())
 print(a.nodeDepthsRecursive())
 print(a.depthFirstSearch())
 print(a.breadthFirstSearch())
+print(a.allKindsOfnodeDepthsIterative())
+print(a.allKindsOfNodeDepthsRecursive())
+
 
 # print(a)
