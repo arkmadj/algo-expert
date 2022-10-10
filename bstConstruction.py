@@ -201,6 +201,27 @@ class BST:
     
     self.calculateBranchSums(node.left, newRunningSum, sums)
     self.calculateBranchSums(node.right, newRunningSum, sums)
+    
+  def nodeDepthsItrerative(self):
+    sumOfDepths = 0
+    stack = [{"node": self, "depth": 0}]
+    while len(stack) > 0:
+      nodeInfo = stack.pop()
+      node, depth  = nodeInfo["node"], nodeInfo["depth"]
+      if node is None:
+        continue
+      sumOfDepths += depth
+      stack.append({"node": node.left, "depth": depth+1})
+      stack.append({"node": node.right, "depth": depth+1})
+    return sumOfDepths
+  
+  def nodeDepthsRecursive(self):
+    return self.nodeDepthsRecursiveHelper(self,0)
+  
+  def nodeDepthsRecursiveHelper(self, node, depth):
+    if node is None:
+      return 0
+    return depth + self.nodeDepthsRecursiveHelper(node.left, depth+1) + self.nodeDepthsRecursiveHelper(node.right, depth+1)
   
 a = BST(10)
 a.insert(5)
@@ -216,7 +237,9 @@ a.insert(15)
 # print(a.preOrderTraversal())
 # print(a.postOrderTraversal())
 # print(a.flattenBinaryTreeInOrder())
-print(a.flattenBinaryTree())
+# print(a.flattenBinaryTree())
 # print(a.branchSums())
+print(a.nodeDepthsItrerative())
+print(a.nodeDepthsRecursive())
 
 # print(a)
