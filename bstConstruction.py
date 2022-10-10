@@ -153,21 +153,29 @@ class BST:
       
   def flattenBinaryTree(self):
     currentNode = self
+    if currentNode is None:
+      return
     leftMost, _ = self.flattenTree(currentNode)
     return leftMost
   
   def flattenTree(self, node):
+    if node is None:
+      return [None, None]
+    
+    # if node.left is None:
+    #   leftMost = node
+    #   print("I am none")
     if node.left is None:
       leftMost = node
     else:
-      leftSubtreeLeftMost, lefttSubtreeRightMost = self.flattenTree(node.left)
-      self.connectNodes(lefttSubtreeRightMost, node)
+      leftSubtreeLeftMost, leftSubtreeRightMost = self.flattenTree(node.left)
+      self.connectNodes(leftSubtreeRightMost, node)
       leftMost = leftSubtreeLeftMost
     
     if node.right is None:
       rightMost = node
     else:
-      rightSubtreeLeftMost, rightSubtreeRightMost = self.flattenTree(node.left)
+      rightSubtreeLeftMost, rightSubtreeRightMost = self.flattenTree(node.right)
       self.connectNodes(node, rightSubtreeLeftMost)
       rightMost = rightSubtreeRightMost
       
@@ -176,6 +184,23 @@ class BST:
   def connectNodes(self, left, right):
     left.right = right
     right.left = left
+    
+  def branchSums(self):
+    sums = []
+    self.calculateBranchSums(self, 0, sums)
+    return sums
+    
+  def calculateBranchSums(self, node, runningSum, sums):
+    if node is None:
+      return
+    
+    newRunningSum = runningSum + node.value
+    if node.left is None and node.right is None:
+      sums.append(newRunningSum)
+      return
+    
+    self.calculateBranchSums(node.left, newRunningSum, sums)
+    self.calculateBranchSums(node.right, newRunningSum, sums)
   
 a = BST(10)
 a.insert(5)
@@ -190,7 +215,8 @@ a.insert(15)
 # print(a.inOrderTraversal())
 # print(a.preOrderTraversal())
 # print(a.postOrderTraversal())
-print(a.flattenBinaryTreeInOrder())
+# print(a.flattenBinaryTreeInOrder())
 print(a.flattenBinaryTree())
+# print(a.branchSums())
 
 # print(a)
