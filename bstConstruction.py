@@ -223,6 +223,32 @@ class BST:
       return 0
     return depth + self.nodeDepthsRecursiveHelper(node.left, depth+1) + self.nodeDepthsRecursiveHelper(node.right, depth+1)
   
+  def depthFirstSearch(self):
+    return self.depthFirstSearchHelper(self, [])
+    
+  def depthFirstSearchHelper(self, node, array):
+    array.append(node.value)
+    if node.left is not None:
+      self.depthFirstSearchHelper(node.left, array)
+    if node.right is not None:
+      self.depthFirstSearchHelper(node.right, array)
+    return array
+  
+  def breadthFirstSearch(self):
+    array = []
+    queue = [self]
+    
+    while len(queue) > 0:
+      current = queue.pop(0)
+      array.append(current.value)
+      if current.left is not None:
+        queue.append(current.left)
+        
+      if current.right is not None:
+        queue.append(current.right)
+        
+    return array
+      
 a = BST(10)
 a.insert(5)
 a.insert(2)
@@ -241,5 +267,7 @@ a.insert(15)
 # print(a.branchSums())
 print(a.nodeDepthsItrerative())
 print(a.nodeDepthsRecursive())
+print(a.depthFirstSearch())
+print(a.breadthFirstSearch())
 
 # print(a)
