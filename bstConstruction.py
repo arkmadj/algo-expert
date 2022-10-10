@@ -135,6 +135,48 @@ class BST:
       array.append(tree.value)
     return array
   
+  def flattenBinaryTreeInOrder(self):
+    inOrderNodes = self.flattenBinaryTreeInOrderHelper(self, [])
+    for i in range(0, len(inOrderNodes) - 1):
+      leftNode = inOrderNodes[i]
+      rightNode = inOrderNodes[i+1]
+      leftNode.right = rightNode
+      rightNode.left = leftNode
+    return inOrderNodes[0]
+  
+  def flattenBinaryTreeInOrderHelper(self, tree, array):
+    if tree is not None:
+      self.flattenBinaryTreeInOrderHelper(tree.left, array)
+      array.append(tree)
+      self.flattenBinaryTreeInOrderHelper(tree.right, array)
+    return array
+      
+  def flattenBinaryTree(self):
+    currentNode = self
+    leftMost, _ = self.flattenTree(currentNode)
+    return leftMost
+  
+  def flattenTree(self, node):
+    if node.left is None:
+      leftMost = node
+    else:
+      leftSubtreeLeftMost, lefttSubtreeRightMost = self.flattenTree(node.left)
+      self.connectNodes(lefttSubtreeRightMost, node)
+      leftMost = leftSubtreeLeftMost
+    
+    if node.right is None:
+      rightMost = node
+    else:
+      rightSubtreeLeftMost, rightSubtreeRightMost = self.flattenTree(node.left)
+      self.connectNodes(node, rightSubtreeLeftMost)
+      rightMost = rightSubtreeRightMost
+      
+    return [leftMost, rightMost]
+  
+  def connectNodes(self, left, right):
+    left.right = right
+    right.left = left
+  
 a = BST(10)
 a.insert(5)
 a.insert(2)
@@ -143,10 +185,12 @@ a.insert(14)
 a.insert(22)
 a.insert(5)
 a.insert(15)
-print(a.findClosestValueInBSTRecursive(12))
-print(a.findClosestValueInBSTIterative(12))
-print(a.inOrderTraversal())
-print(a.preOrderTraversal())
-print(a.postOrderTraversal())
+# print(a.findClosestValueInBSTRecursive(12))
+# print(a.findClosestValueInBSTIterative(12))
+# print(a.inOrderTraversal())
+# print(a.preOrderTraversal())
+# print(a.postOrderTraversal())
+print(a.flattenBinaryTreeInOrder())
+print(a.flattenBinaryTree())
 
-print(a)
+# print(a)
