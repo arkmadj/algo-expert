@@ -262,7 +262,8 @@ class BST:
     return sumofAllDepths
   
   def allKindsOfNodeDepthsRecursive(self):
-    return self.nodeDepthsRecursiveHelper(self, 0)
+    root = self
+    return self.allKindsOfNodeDepthRecursiveHelper(root)
   
   def allKindsOfNodeDepthRecursiveHelper(self, node):
     if node is None:
@@ -285,12 +286,12 @@ a.insert(15)
 # print(a.flattenBinaryTreeInOrder())
 # print(a.flattenBinaryTree())
 # print(a.branchSums())
-print(a.nodeDepthsItrerative())
-print(a.nodeDepthsRecursive())
-print(a.depthFirstSearch())
-print(a.breadthFirstSearch())
+# print(a.nodeDepthsItrerative())
+# print(a.nodeDepthsRecursive())
+# print(a.depthFirstSearch())
+# print(a.breadthFirstSearch())
 print(a.allKindsOfnodeDepthsIterative())
-# print(a.allKindsOfNodeDepthsRecursive())
+print(a.allKindsOfNodeDepthsRecursive())
 
 
 # print(a)
