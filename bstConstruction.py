@@ -1,3 +1,6 @@
+from turtle import right
+
+
 class BST:
   def __init__(self, value):
     self.value = value
@@ -301,6 +304,31 @@ class BST:
       self.addNodeDepths(node.right, nodeDepths, nodeCounts)
       nodeDepths[node] += nodeDepths[node.right] + nodeCounts[node.right]
     
+  def allKindsOfNodeDepthsLinearTwo(self):
+    root = self
+    return self.getTreeInfo(root).sumOfAllDepths
+  
+  def getTreeInfo(self, tree):
+    if tree is None:
+      return self.TreeInfo(0,0,0)
+    
+    leftTreeInfo = self.getTreeInfo(tree.left)
+    rightTreeInfo = self.getTreeInfo(tree.right)
+    
+    sumOfLeftDepths = leftTreeInfo.sumOfDepths + leftTreeInfo.numNodesInTree
+    sumOfRightDepths = rightTreeInfo.sumOfDepths + rightTreeInfo.numNodesInTree
+
+    numNodesInTree = 1 + leftTreeInfo.numNodesInTree + rightTreeInfo.numNodesInTree
+    sumOfDepths = sumOfLeftDepths + sumOfRightDepths
+    sumOfAllDepths = sumOfDepths + leftTreeInfo.sumOfAllDepths + rightTreeInfo.sumOfAllDepths
+    
+    return self.TreeInfo(numNodesInTree, sumOfDepths, sumOfAllDepths)
+  
+  class TreeInfo:
+    def __init__(self, numNodesInTree, sumOfDepths, sumOfAllDepths):
+      self.numNodesInTree = numNodesInTree
+      self.sumOfDepths = sumOfDepths
+      self.sumOfAllDepths = sumOfAllDepths
       
 a = BST(10)
 a.insert(5)
@@ -325,5 +353,6 @@ a.insert(15)
 print(a.allKindsOfnodeDepthsIterative())
 print(a.allKindsOfNodeDepthsRecursive())
 print(a.allKindsOfNodeDepthsLinearOne())
+print(a.allKindsOfNodeDepthsLinearTwo())
 
 # print(a)
