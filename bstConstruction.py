@@ -269,6 +269,38 @@ class BST:
     if node is None:
       return 0
     return self.allKindsOfNodeDepthRecursiveHelper(node.left) + self.allKindsOfNodeDepthRecursiveHelper(node.right) + self.nodeDepthsRecursiveHelper(node)
+  
+  def allKindsOfNodeDepthsLinearOne(self):
+    root = self
+    nodeCounts = {}
+    self.addNodeCounts(root, nodeCounts)
+    nodeDepths = {}
+    self.addNodeDepths(root, nodeDepths, nodeCounts)
+    return self.sumAllNodeDepths(root, nodeDepths)
+  
+  def addNodeCounts(self, node, nodeCounts):
+    nodeCounts[node] = 1
+    if node.left is not None:
+      self.addNodeCounts(node.left, nodeCounts)
+      nodeCounts[node] += nodeCounts[node.left]
+    if node.right is not None:
+      self.addNodeCounts(node.right, nodeCounts)
+      nodeCounts[node] += nodeCounts[node.right]
+      
+  def sumAllNodeDepths(self, node, nodeDepths):
+    if node is None:
+      return 0
+    return self.sumAllNodeDepths(node.left, nodeDepths) + self.sumAllNodeDepths(node.right, nodeDepths) + nodeDepths[node]
+  
+  def addNodeDepths(self, node, nodeDepths, nodeCounts):
+    nodeDepths[node] = 0
+    if node.left is not None:
+      self.addNodeDepths(node.left, nodeDepths, nodeCounts)
+      nodeDepths[node] += nodeDepths[node.left] + nodeCounts[node.left]
+    if node.right is not None:
+      self.addNodeDepths(node.right, nodeDepths, nodeCounts)
+      nodeDepths[node] += nodeDepths[node.right] + nodeCounts[node.right]
+    
       
 a = BST(10)
 a.insert(5)
@@ -292,6 +324,6 @@ a.insert(15)
 # print(a.breadthFirstSearch())
 print(a.allKindsOfnodeDepthsIterative())
 print(a.allKindsOfNodeDepthsRecursive())
-
+print(a.allKindsOfNodeDepthsLinearOne())
 
 # print(a)
