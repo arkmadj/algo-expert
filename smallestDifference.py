@@ -28,4 +28,3 @@ def smallestDifference(arrayOne, arrayTwo):
   return smallestPair
 
 print(smallestDifference([-1,5,10,20,28,3], [26,134,135,15,17]))
-print(smallestDifference([-1,5,10,20,28,3], [26,134,135,15,17]))
