@@ -1,7 +1,7 @@
 def threeLargestNumbers(array):
   threeLargest = [None, None, None]
   for num in array:
-      updatelargest(threeLargest, num)
+    updatelargest(threeLargest, num)
   return threeLargest
 
 def updatelargest(threeLargest, num):
