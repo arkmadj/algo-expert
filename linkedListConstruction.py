@@ -11,7 +11,10 @@ class DoublyLinkedList:
     self.insertBefore(self.head, node)
   
   def setTail(self, node):
-    
+    if self.tail is None:
+      self.setHead(node)
+      return
+    self.insertAfter(self.tail, node)
   
   def insertBefore(self, node, nodeToInsert):
     if nodeToInsert == self.head and nodeToInsert == self.tail:
