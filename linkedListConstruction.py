@@ -22,7 +22,16 @@ class DoublyLinkedList:
     node.prev = nodeToInsert
   
   def insertAfter(self, node, nodeToInsert):
-    pass
+    if nodeToInsert == self.head  and nodeToInsert == self.tail:
+      return
+    self.remove(nodeToInsert)
+    nodeToInsert.prev = node
+    nodeToInsert.next = node.next
+    if node.next == None:
+      self.tail = nodeToInsert
+    else:
+      node.next.prev = nodeToInsert
+    node.next = nodeToInsert
   
   def insertAtPosition(self, position, nodeToInsert):
     pass
