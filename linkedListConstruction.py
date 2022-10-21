@@ -10,7 +10,16 @@ class DoublyLinkedList:
     pass
   
   def insertBefore(self, node, nodeToInsert):
-    pass
+    if nodeToInsert == self.head and nodeToInsert == self.tail:
+      return
+    self.remove(nodeToInsert)
+    nodeToInsert.prev = node.prev
+    nodeToInsert.next = node
+    if node.prev == None:
+      self.head = nodeToInsert
+    else:
+      node.prev.next = nodeToInsert
+    node.prev = nodeToInsert
   
   def insertAfter(self, node, nodeToInsert):
     pass
