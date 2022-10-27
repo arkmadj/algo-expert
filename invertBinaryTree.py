@@ -20,4 +20,5 @@ def invertBinaryTreeRecu(tree):
   
 
 if __name__ == "__main__":
+  # Fix this with import BST
   pass
