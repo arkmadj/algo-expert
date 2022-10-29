@@ -13,7 +13,7 @@ def longestPalindromicSubstring(string):
 def getLongestPalindromeFrom(string, leftIdx, rightIdx):
   while leftIdx >= 0 and rightIdx < len(string):
     if string[leftIdx] != string[rightIdx]:
-      break
+      break 
     leftIdx -= 1
     rightIdx += 1
   return [leftIdx + 1, rightIdx]
