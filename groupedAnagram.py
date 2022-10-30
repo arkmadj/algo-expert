@@ -28,7 +28,17 @@ def groupedAnagrams(words):
 
   return result
 
+def groupedAnagramsSimplier(words):
+  anagrams = {}
+  for word in words:
+    sortedWord = "".join(sorted(word))
+    if sortedWord in anagrams:
+      anagrams[sortedWord].append(word)
+    else:
+      anagrams[sortedWord] = [word]
+  return list(anagrams.values())
+
 
 a = ["yo", "act", "flop", "tac", "cat", "oy", "olfp"]
-
 print(groupedAnagrams(a))
+print(groupedAnagramsSimplier(a))
