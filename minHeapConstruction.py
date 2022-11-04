@@ -3,7 +3,10 @@ class MinHeap:
     self.heap = self.buildHeap(array)
 
   def buildHeap(self, array):
-    pass
+    firstParentIdx = (len(array)- 2) // 2
+    for currentIdx in reversed(range(firstParentIdx)):
+      self.siftDown(currentIdx, len(array) - 1, array)
+    return array
   
   def siftDown(self, currentIdx, endIdx, heap):
     childOneIdx = currentIdx * 2 + 1
