@@ -9,7 +9,11 @@ class MinHeap:
     pass
   
   def siftUp(self, currentIdx, heap):
-    pass
+    parentIdx = (currentIdx - 1) // 2
+    while currentIdx > 0  and heap[currentIdx] < heap[parentIdx]:
+      self.swap(currentIdx, parentIdx, heap)
+      currentIdx = parentIdx
+      parentIdx = (currentIdx - 1) // 2
   
   def peek(self):
     return self.heap[0]
