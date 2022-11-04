@@ -24,3 +24,7 @@ def backtrackAncestralTree(lowerDescendant, higherDescendant, diff):
     lowerDescendant = lowerDescendant.ancestor
     higherDescendant = higherDescendant.ancestor
   return lowerDescendant
+
+if __name__ == '__main__':
+  # Add how to run the code
+  pass
