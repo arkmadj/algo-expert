@@ -47,4 +47,6 @@ class MinHeap:
     heap[i], heap[j] = heap[j], heap[i]
 
 if __name__ == "__main__":
-  #  a = [30,102,23,17,18,9,44,12,31]
+   a = [30,102,23,17,18,9,44,12,31]
+   heapA = MinHeap(a)
+   print(heapA.__dict__)
