@@ -375,6 +375,18 @@ def constructMinHeightBSTTwo(array, bst, startIdx, endIdx):
   constructMinHeightBSTTwo(array, bst, startIdx, midIdx - 1)
   constructMinHeightBSTTwo(array, bst, midIdx + 1, endIdx)
   return bst
+
+def minHeightBSTThree(array):
+  return constructMinHeightBSTThree(array, 0, len(array) - 1)
+
+def constructMinHeightBSTThree(array, startIdx, endIdx):
+  if endIdx < startIdx:
+    return
+  midIdx = (startIdx + endIdx) // 2
+  bst = BST(array[midIdx])
+  bst.left = constructMinHeightBSTThree(array, startIdx, midIdx - 1)
+  bst.right = constructMinHeightBSTThree(array, midIdx + 1, endIdx)
+  return bst
     
       
 a = BST(10)
@@ -404,5 +416,6 @@ a.insert(15)
 print(a.validateBST())
 print(minHeightBST([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
 print(minHeightBSTTwo([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
+print(minHeightBSTThree([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
 
 # print(a)
