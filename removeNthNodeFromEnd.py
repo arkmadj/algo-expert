@@ -1,6 +1,6 @@
 class Node:
-  def __init__(self, item) -> None:
-    self.item = item
+  def __init__(self, data) -> None:
+    self.data = data
     self.next = None
 class LinkedList:
   def __init__(self) -> None:
@@ -34,8 +34,19 @@ class LinkedList:
       second = second.next
       first = first.next
     first.next = first.next.next
+    
+  def printList(self):
+    temp = self.head
+    while(temp):
+      print(str(temp.data) + "->", end="")
+      temp = temp.next
   
 
 if __name__ == "__main__":
   a = LinkedList()
-  a.head = Node(0)
+  for i in range(10):
+    a.insertAtEnd(i)
+  a.printList()
+  a.removeNthNodeFromTheEnd(4)
+  print("\n")
+  a.printList()
