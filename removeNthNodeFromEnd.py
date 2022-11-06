@@ -1,3 +1,11 @@
+class Node:
+  def __init__(self, item) -> None:
+    self.item = item
+    self.next = None
+class LinkedList:
+  def __init__(self) -> None:
+    self.head = None
+
 def removeNthNodeFromTheEnd(head, n):
   counter = 1
   first = head
