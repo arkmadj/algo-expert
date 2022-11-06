@@ -353,6 +353,27 @@ def constructMinHeightBST(array, bst, startIdx, endIdx):
     bst.insert(valueToAdd)
   constructMinHeightBST(array, bst, startIdx, midIdx - 1)
   constructMinHeightBST(array, bst, midIdx + 1, endIdx)
+  return bst  
+
+def minHeightBSTTwo(array):
+  return constructMinHeightBSTTwo(array, None, 0, len(array) - 1)
+
+def constructMinHeightBSTTwo(array, bst, startIdx, endIdx):
+  if endIdx < startIdx:
+    return
+  midIdx = (startIdx + endIdx) // 2
+  newBSTNode = BST(array[midIdx])
+  if bst is None:
+    bst = newBSTNode
+  else:
+    if array[midIdx] < bst.value:
+      bst.left = newBSTNode
+      bst = bst.left
+    else:
+      bst.right = newBSTNode
+      bst = bst.right
+  constructMinHeightBSTTwo(array, bst, startIdx, midIdx - 1)
+  constructMinHeightBSTTwo(array, bst, midIdx + 1, endIdx)
   return bst
     
       
@@ -382,5 +403,6 @@ a.insert(15)
 # print(a.allKindsOfNodeDepthsLinearTwo())
 print(a.validateBST())
 print(minHeightBST([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
+print(minHeightBSTTwo([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
 
 # print(a)
