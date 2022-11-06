@@ -331,7 +331,17 @@ class BST:
       self.sumOfAllDepths = sumOfAllDepths
       
   def validateBST(self):
-    pass
+    tree = self
+    return self.validateBSTHelper(tree, float("-inf"), float("inf"))
+  
+  def validateBSTHelper(self, tree, minValue, maxValue):
+    if tree is None:
+      return True
+    if tree.value < minValue or tree.value >= maxValue:
+      return False
+    leftIsValid = self.validateBSTHelper(tree.left, minValue, tree.value)
+    return leftIsValid and self.validateBSTHelper(tree.right, tree.value, maxValue)
+    
       
 a = BST(10)
 a.insert(5)
@@ -353,9 +363,10 @@ a.insert(15)
 # print(a.nodeDepthsRecursive())
 # print(a.depthFirstSearch())
 # print(a.breadthFirstSearch())
-print(a.allKindsOfnodeDepthsIterative())
-print(a.allKindsOfNodeDepthsRecursive())
-print(a.allKindsOfNodeDepthsLinearOne())
-print(a.allKindsOfNodeDepthsLinearTwo())
+# print(a.allKindsOfnodeDepthsIterative())
+# print(a.allKindsOfNodeDepthsRecursive())
+# print(a.allKindsOfNodeDepthsLinearOne())
+# print(a.allKindsOfNodeDepthsLinearTwo())
+print(a.validateBST())
 
 # print(a)
