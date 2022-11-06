@@ -70,7 +70,7 @@ class BST:
     currentNode = self
     while currentNode.left is not None:
       currentNode = currentNode.left
-    return currentNode.value\
+    return currentNode.value
       
   def findClosestValueInBSTRecursive(self, target):
     currentNode = self
@@ -329,6 +329,9 @@ class BST:
       self.numNodesInTree = numNodesInTree
       self.sumOfDepths = sumOfDepths
       self.sumOfAllDepths = sumOfAllDepths
+      
+  def validateBST(self):
+    pass
       
 a = BST(10)
 a.insert(5)
