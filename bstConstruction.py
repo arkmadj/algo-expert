@@ -1,6 +1,3 @@
-from turtle import right
-
-
 class BST:
   def __init__(self, value):
     self.value = value
@@ -341,6 +338,22 @@ class BST:
       return False
     leftIsValid = self.validateBSTHelper(tree.left, minValue, tree.value)
     return leftIsValid and self.validateBSTHelper(tree.right, tree.value, maxValue)
+  
+def minHeightBST(array):
+  return constructMinHeightBST(array, None, 0, len(array) - 1)
+
+def constructMinHeightBST(array, bst, startIdx, endIdx):
+  if endIdx < startIdx:
+    return
+  midIdx = (startIdx + endIdx) // 2
+  valueToAdd = array[midIdx]
+  if bst is None:
+    bst = BST(valueToAdd)
+  else:
+    bst.insert(valueToAdd)
+  constructMinHeightBST(array, bst, startIdx, midIdx - 1)
+  constructMinHeightBST(array, bst, midIdx + 1, endIdx)
+  return bst
     
       
 a = BST(10)
@@ -368,5 +381,6 @@ a.insert(15)
 # print(a.allKindsOfNodeDepthsLinearOne())
 # print(a.allKindsOfNodeDepthsLinearTwo())
 print(a.validateBST())
+print(minHeightBST([1, 2, 5, 7 ,10, 13, 14, 15, 22]).preOrderTraversal())
 
 # print(a)
