@@ -381,7 +381,7 @@ def minHeightBSTThree(array):
 
 def constructMinHeightBSTThree(array, startIdx, endIdx):
   if endIdx < startIdx:
-    return
+    return None
   midIdx = (startIdx + endIdx) // 2
   bst = BST(array[midIdx])
   bst.left = constructMinHeightBSTThree(array, startIdx, midIdx - 1)
