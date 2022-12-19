@@ -1,7 +1,3 @@
-from re import L
-from turtle import right
-
-
 def binarySearchRecu(array, target):
   return binarySearchRecuHelper(array, target, 0, len(array) - 1)
 
